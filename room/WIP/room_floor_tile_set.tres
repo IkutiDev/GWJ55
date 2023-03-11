@@ -1,0 +1,14 @@
+[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://dyof3vcstne25"]
+
+[ext_resource type="Texture2D" uid="uid://dp8gbehft20ps" path="res://room/WIP/WIP_floor_tile.png" id="1_owai8"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6k4ly"]
+texture = ExtResource("1_owai8")
+texture_region_size = Vector2i(256, 223)
+0:0/0 = 0
+
+[resource]
+tile_shape = 1
+tile_layout = 4
+tile_size = Vector2i(256, 150)
+sources/0 = SubResource("TileSetAtlasSource_6k4ly")
