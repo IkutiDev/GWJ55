@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://bp7qvv701wsi6"]
+[gd_scene load_steps=3 format=3 uid="uid://bp7qvv701wsi6"]
 
 [ext_resource type="TileSet" uid="uid://dyof3vcstne25" path="res://room/WIP/room_floor_tile_set.tres" id="1_2lhwq"]
+[ext_resource type="AudioStream" uid="uid://g85q2sfmhb68" path="res://audio/phase_changes/384188__inspectorj__rooster-crowing-a.wav" id="2_hfuwj"]
 
 [node name="Game" type="Node2D"]
 
@@ -16,3 +17,7 @@ layer_0/tile_data = PackedInt32Array(-65536, 0, 0, -65535, 0, 0, -1, 0, 0, -6553
 
 [node name="GameplayCamera2D" type="Camera2D" parent="."]
 zoom = Vector2(0.35, 0.35)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_hfuwj")
+autoplay = true
