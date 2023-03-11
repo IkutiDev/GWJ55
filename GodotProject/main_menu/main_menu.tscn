@@ -1,8 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://cs3ld10q2qsvk"]
+[gd_scene load_steps=3 format=3 uid="uid://cs3ld10q2qsvk"]
 
 [ext_resource type="Script" path="res://main_menu/main_menu.gd" id="1_hrd1t"]
+[ext_resource type="PackedScene" uid="uid://bp7qvv701wsi6" path="res://game.tscn" id="2_16geq"]
 
-[node name="MainMenu" type="Control"]
+[node name="MainMenu" type="Control" node_paths=PackedStringArray("quit_button")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -10,6 +11,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_hrd1t")
+game_scene = ExtResource("2_16geq")
+quit_button = NodePath("VBoxContainer/Quit")
 
 [node name="GameTitle" type="Label" parent="."]
 layout_mode = 1

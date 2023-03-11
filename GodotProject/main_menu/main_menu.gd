@@ -1,5 +1,6 @@
 extends Control
 
+@export var game_scene : PackedScene
 @export var quit_button : Button
 @export var settings_scene : PackedScene
 
@@ -10,7 +11,7 @@ func _ready():
 		quit_button.queue_free()
 
 func _on_play_pressed():
-	pass
+	GameManager.change_scene_with_fade(game_scene)
 
 
 func _on_settings_pressed():
