@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bp7qvv701wsi6"]
 
-[ext_resource type="TileSet" path="res://room/WIP/room_floor_tile_set.tres" id="1_2lhwq"]
+[ext_resource type="TileSet" uid="uid://dyof3vcstne25" path="res://room/WIP/room_floor_tile_set.tres" id="1_2lhwq"]
 
 [node name="Game" type="Node2D"]
 
