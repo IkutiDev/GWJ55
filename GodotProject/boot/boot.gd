@@ -1,5 +1,6 @@
 extends Control
 
+@export var main_menu_scene : PackedScene
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -12,4 +13,4 @@ func _process(delta):
 
 
 func _on_animation_player_animation_finished(anim_name):
-	get_tree().change_scene_to_file("res://game.tscn")
+	get_tree().change_scene_to_packed(main_menu_scene)

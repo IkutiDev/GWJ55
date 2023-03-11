@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://ckdnaiqs2aicw"]
+[gd_scene load_steps=7 format=3 uid="uid://ckdnaiqs2aicw"]
 
 [ext_resource type="Script" path="res://boot/boot.gd" id="1_lsvvo"]
 [ext_resource type="Texture2D" uid="uid://d103uswhvlaxb" path="res://boot/gwj_logo.png" id="2_pfy5r"]
+[ext_resource type="PackedScene" uid="uid://cs3ld10q2qsvk" path="res://main_menu/main_menu.tscn" id="2_wbgwq"]
 
 [sub_resource type="Animation" id="Animation_pldb3"]
 length = 0.001
@@ -48,6 +49,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_lsvvo")
+main_menu_scene = ExtResource("2_wbgwq")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
