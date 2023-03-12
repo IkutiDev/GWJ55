@@ -1,9 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://bp7qvv701wsi6"]
+[gd_scene load_steps=7 format=3 uid="uid://bp7qvv701wsi6"]
 
 [ext_resource type="TileSet" uid="uid://dyof3vcstne25" path="res://room/WIP/room_floor_tile_set.tres" id="1_2lhwq"]
+[ext_resource type="Script" path="res://game.gd" id="1_rfqmb"]
+[ext_resource type="PackedScene" uid="uid://bb2psf86b80be" path="res://gameplay_gui/gameplay_gui.tscn" id="2_0o5px"]
 [ext_resource type="AudioStream" uid="uid://g85q2sfmhb68" path="res://audio/phase_changes/384188__inspectorj__rooster-crowing-a.wav" id="2_hfuwj"]
+[ext_resource type="Script" path="res://player/tower_placer.gd" id="5_fcmep"]
+[ext_resource type="Texture2D" uid="uid://rg22yiwv6hut" path="res://icon.svg" id="6_hf3y1"]
 
 [node name="Game" type="Node2D"]
+script = ExtResource("1_rfqmb")
+gameplay_gui = ExtResource("2_0o5px")
 
 [node name="PlayerRoom" type="Node2D" parent="."]
 
@@ -20,4 +26,17 @@ zoom = Vector2(0.35, 0.35)
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("2_hfuwj")
-autoplay = true
+
+[node name="TowerPlacer" type="Node2D" parent="." node_paths=PackedStringArray("floor_tile_map", "selection_visual")]
+position = Vector2(-225, -125)
+script = ExtResource("5_fcmep")
+floor_tile_map = NodePath("../PlayerRoom/FloorTileMap")
+selection_visual = NodePath("SelectionVisual")
+offset = Vector2(0, 25)
+
+[node name="SelectionVisual" type="Sprite2D" parent="TowerPlacer"]
+modulate = Color(0.643137, 0.992157, 0.447059, 1)
+rotation = 0.560251
+scale = Vector2(1.137, 1.137)
+skew = 0.500909
+texture = ExtResource("6_hf3y1")
