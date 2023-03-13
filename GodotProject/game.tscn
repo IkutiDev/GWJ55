@@ -5,11 +5,10 @@
 [ext_resource type="PackedScene" uid="uid://bb2psf86b80be" path="res://gameplay_gui/gameplay_gui.tscn" id="2_0o5px"]
 [ext_resource type="AudioStream" uid="uid://g85q2sfmhb68" path="res://audio/phase_changes/384188__inspectorj__rooster-crowing-a.wav" id="2_hfuwj"]
 [ext_resource type="Script" path="res://player/tower_placer.gd" id="5_fcmep"]
-[ext_resource type="Texture2D" uid="uid://rg22yiwv6hut" path="res://icon.svg" id="6_hf3y1"]
+[ext_resource type="Script" path="res://day_manager.gd" id="7_vsebb"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_rfqmb")
-gameplay_gui = ExtResource("2_0o5px")
 
 [node name="PlayerRoom" type="Node2D" parent="."]
 
@@ -39,4 +38,14 @@ modulate = Color(0.643137, 0.992157, 0.447059, 1)
 rotation = 0.560251
 scale = Vector2(1.137, 1.137)
 skew = 0.500909
-texture = ExtResource("6_hf3y1")
+
+[node name="DayManager" type="Node" parent="."]
+script = ExtResource("7_vsebb")
+days_names = ["Day 1", "Day 2", "Day 3", "Day 4", "Day 5"]
+nights_names = ["Night 1", "Night 2", "Night 3", "Night 4", "Night 5"]
+tower_placing_timer = 5.0
+
+[node name="gameplay_gui" parent="." instance=ExtResource("2_0o5px")]
+
+[connection signal="phase_changed" from="DayManager" to="gameplay_gui" method="_on_day_manager_phase_changed"]
+[connection signal="timer_changed" from="DayManager" to="gameplay_gui" method="_on_day_manager_timer_changed"]

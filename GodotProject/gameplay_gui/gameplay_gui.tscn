@@ -1,26 +1,33 @@
-[gd_scene format=3 uid="uid://bb2psf86b80be"]
+[gd_scene load_steps=3 format=3 uid="uid://bb2psf86b80be"]
 
-[node name="gameplay_gui" type="CanvasLayer"]
+[ext_resource type="Script" path="res://gameplay_gui/gameplay_gui.gd" id="1_1hro6"]
+[ext_resource type="PackedScene" uid="uid://b5yhrygkg5m0n" path="res://gameplay_gui/towers/tower_icon.tscn" id="2_nlwc0"]
 
-[node name="Control" type="Control" parent="."]
+[node name="GameplayGui" type="CanvasLayer" node_paths=PackedStringArray("phase_name_label", "timer_label")]
+script = ExtResource("1_1hro6")
+phase_name_label = NodePath("GUI/PhaseName")
+timer_static_text = "Timer: "
+timer_label = NodePath("GUI/Timer")
+
+[node name="GUI" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 50.0
-offset_top = 25.0
-offset_right = -50.0
-offset_bottom = -25.0
+offset_left = 14.0
+offset_top = 29.0
+offset_right = -86.0
+offset_bottom = -21.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="DayName" type="Label" parent="Control"]
+[node name="PhaseName" type="Label" parent="GUI"]
 layout_mode = 0
 offset_right = 104.0
 offset_bottom = 26.0
 text = "Day 99"
 
-[node name="Timer" type="Label" parent="Control"]
+[node name="Timer" type="Label" parent="GUI"]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -30,3 +37,29 @@ offset_right = 52.0
 offset_bottom = 26.0
 grow_horizontal = 2
 text = "TIMER: 99"
+
+[node name="Toybox" type="Panel" parent="."]
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -172.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Toybox"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -48.0
+offset_top = 16.0
+offset_right = 48.0
+offset_bottom = 695.0
+grow_horizontal = 2
+theme_override_constants/separation = 15
+
+[node name="TowerIcon" parent="Toybox/VBoxContainer" instance=ExtResource("2_nlwc0")]
+layout_mode = 2
+
+[connection signal="pressed" from="Toybox/VBoxContainer/TowerIcon" to="." method="_on_tower_icon_pressed"]

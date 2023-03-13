@@ -4,6 +4,11 @@ extends Node
 @export var selection_visual : Sprite2D
 @export var offset : Vector2 = Vector2.ONE
 
+var can_place_towers := false
+
+const AVAILABLE_CELL_ID := 0
+const INVAILD_CELL_ID := 1
+
 func _ready():
 	selection_visual.hide()
 
@@ -18,6 +23,7 @@ func _process(delta):
 	if cell_id == -1:
 		selection_visual.hide()
 	else:
+		print(cell_id)
 		selection_visual.position = tile_center_pos
 		selection_visual.show()
-	print(hovered_cell)
+	
