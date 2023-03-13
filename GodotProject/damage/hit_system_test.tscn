@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://bnecidjsm7o71"]
+
+[ext_resource type="PackedScene" uid="uid://dlnpkx46ss0cd" path="res://damage/hitbox/hit_box_area_2d.tscn" id="1_vlwpo"]
+[ext_resource type="PackedScene" uid="uid://dyly52q653cet" path="res://damage/hurtbox/hurt_box_area_2d.tscn" id="2_3hvej"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g7txd"]
+size = Vector2(57, 39)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rtpiq"]
+radius = 22.8035
+
+[node name="HitSystemTest" type="Node2D"]
+
+[node name="hit_box_area_2d" parent="." instance=ExtResource("1_vlwpo")]
+damage = 10.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hit_box_area_2d"]
+position = Vector2(109, 37)
+shape = SubResource("RectangleShape2D_g7txd")
+
+[node name="hurt_box_area_2d" parent="." instance=ExtResource("2_3hvej")]
+team = 1
+armor = 2
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="hurt_box_area_2d"]
+position = Vector2(143, 62)
+shape = SubResource("CircleShape2D_rtpiq")
