@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://damage/hitbox/hit_box_area_2d.gd" id="1_4p44c"]
 
-[node name="hit_box_area_2d" type="Area2D"]
+[node name="HitBoxArea2D" type="Area2D"]
 collision_layer = 0
 collision_mask = 2
 monitorable = false

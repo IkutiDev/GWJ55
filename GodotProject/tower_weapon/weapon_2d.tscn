@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://b7l7bqk3t0ceu"]
+
+[ext_resource type="Script" path="res://tower_weapon/weapon_2d.gd" id="1_i70nl"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hvsxo"]
+resource_local_to_scene = true
+radius = 128.0
+
+[node name="Weapon2D" type="Node2D" node_paths=PackedStringArray("_bullet_spawn_position", "_cooldown_timer", "_range_area")]
+script = ExtResource("1_i70nl")
+_bullet_spawn_position = NodePath("BulletSpawnPosition2D")
+_cooldown_timer = NodePath("CooldownTimer")
+_range_area = NodePath("RangeArea2D")
+
+[node name="BulletSpawnPosition2D" type="Marker2D" parent="."]
+
+[node name="RangeArea2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RangeArea2D"]
+shape = SubResource("CircleShape2D_hvsxo")
+
+[node name="CooldownTimer" type="Timer" parent="."]
+one_shot = true
