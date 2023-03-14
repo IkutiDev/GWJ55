@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://bq3ybt2aqxhwm"]
+
+[ext_resource type="Texture2D" uid="uid://rg22yiwv6hut" path="res://icon.svg" id="1_d4b25"]
+[ext_resource type="Script" path="res://tower_weapon/bullet.gd" id="1_i7uai"]
+[ext_resource type="PackedScene" uid="uid://dlnpkx46ss0cd" path="res://damage/hitbox/hit_box_area_2d.tscn" id="2_4kgy2"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_adkd6"]
+radius = 4.0
+height = 24.0
+
+[node name="Bullet" type="Node2D"]
+script = ExtResource("1_i7uai")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.175, 0.0554687)
+texture = ExtResource("1_d4b25")
+
+[node name="HitBoxArea2D" parent="." instance=ExtResource("2_4kgy2")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxArea2D"]
+rotation = -1.5708
+shape = SubResource("CapsuleShape2D_adkd6")
