@@ -6,6 +6,7 @@ extends Node2D
 var _tween : Tween
 
 func _enter_tree():
+	_tween = get_tree().create_tween()
 	_tween.set_process_mode(Tween.TWEEN_PROCESS_PHYSICS)
 
 func _init():

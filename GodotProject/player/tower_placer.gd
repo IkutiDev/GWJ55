@@ -6,6 +6,8 @@ extends Node
 
 var can_place_towers := false
 
+var _current_tower : Tower
+
 const AVAILABLE_CELL_ID := 0
 const INVAILD_CELL_ID := 1
 
@@ -14,7 +16,30 @@ func _ready():
 
 func _input(event):
 	pass
+	
+func set_cell_unplaceable(cell: Vector2i) -> void:
+	floor_tile_map.set_cell(0, cell, INVAILD_CELL_ID)
+	
+func set_cell_placeable(cell: Vector2i) -> void:
+	floor_tile_map.set_cell(0, cell, AVAILABLE_CELL_ID)
 
+func is_cell_placeable(cell: Vector2i) -> bool:
+	return floor_tile_map.get_cell_source_id(0, cell) == AVAILABLE_CELL_ID
+	
+func setup_available_cells(cells_array: PackedVector2Array) -> void:
+	for cell in cells_array:
+		set_cell_placeable(cell)
+	
+	
+func add_new_tower(tower: Tower) -> void:
+	if _current_tower:
+		_current_tower.queue_free()
+		
+	add_child(tower)
+	_current_tower = tower
+	
+	set_process_unhandled_input(true)
+	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	var hovered_cell = floor_tile_map.local_to_map(floor_tile_map.get_local_mouse_position() + offset)

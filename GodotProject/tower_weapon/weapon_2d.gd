@@ -32,7 +32,7 @@ func set_fire_range(new_fire_range: float) -> void:
 	fire_range = new_fire_range
 	
 	if not is_inside_tree():
-		await _ready()
+		await ready
 	
 	_range_shape.radius = fire_range
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bp7qvv701wsi6"]
+[gd_scene load_steps=8 format=3 uid="uid://bp7qvv701wsi6"]
 
 [ext_resource type="TileSet" uid="uid://dyof3vcstne25" path="res://room/WIP/room_floor_tile_set.tres" id="1_2lhwq"]
 [ext_resource type="Script" path="res://game.gd" id="1_rfqmb"]
@@ -6,6 +6,7 @@
 [ext_resource type="AudioStream" uid="uid://g85q2sfmhb68" path="res://audio/phase_changes/384188__inspectorj__rooster-crowing-a.wav" id="2_hfuwj"]
 [ext_resource type="Script" path="res://player/tower_placer.gd" id="5_fcmep"]
 [ext_resource type="Script" path="res://day_manager.gd" id="7_vsebb"]
+[ext_resource type="PackedScene" uid="uid://dbku73oi641ts" path="res://tower_weapon/tower.tscn" id="7_we28e"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_rfqmb")
@@ -46,6 +47,9 @@ nights_names = ["Night 1", "Night 2", "Night 3", "Night 4", "Night 5"]
 tower_placing_timer = 5.0
 
 [node name="gameplay_gui" parent="." instance=ExtResource("2_0o5px")]
+
+[node name="Tower" parent="." instance=ExtResource("7_we28e")]
+position = Vector2(284, -307)
 
 [connection signal="phase_changed" from="DayManager" to="gameplay_gui" method="_on_day_manager_phase_changed"]
 [connection signal="timer_changed" from="DayManager" to="gameplay_gui" method="_on_day_manager_timer_changed"]

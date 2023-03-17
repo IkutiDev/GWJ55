@@ -1,0 +1,54 @@
+[gd_scene load_steps=8 format=3 uid="uid://dbku73oi641ts"]
+
+[ext_resource type="Texture2D" uid="uid://84g77e7li05g" path="res://room/WIP/block(9).png" id="1_ohcej"]
+[ext_resource type="Script" path="res://tower_weapon/tower.gd" id="1_t6206"]
+[ext_resource type="PackedScene" uid="uid://b7l7bqk3t0ceu" path="res://tower_weapon/weapon_2d.tscn" id="2_00d4g"]
+[ext_resource type="PackedScene" uid="uid://cwd5swlm2p78q" path="res://selectable_area_2d.tscn" id="3_oprr8"]
+[ext_resource type="PackedScene" uid="uid://i4whilt82fmp" path="res://UIUnit.tscn" id="4_xq7n7"]
+[ext_resource type="PackedScene" uid="uid://dmeia08ut1fn2" path="res://UICooldownBar/UICooldownBar.tscn" id="5_4ooqt"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p4m5w"]
+size = Vector2(760, 700)
+
+[node name="Tower" type="Node2D" node_paths=PackedStringArray("_weapon", "_interface", "_cooldown_bar", "_selection")]
+scale = Vector2(0.3, 0.3)
+script = ExtResource("1_t6206")
+_weapon = NodePath("Weapon2D")
+_interface = NodePath("Interface")
+_cooldown_bar = NodePath("UICooldownBar")
+_selection = NodePath("SelectableArea2D")
+
+[node name="Visual" type="Sprite2D" parent="."]
+texture = ExtResource("1_ohcej")
+
+[node name="Weapon2D" parent="." instance=ExtResource("2_00d4g")]
+fire_range = 650.0
+
+[node name="SelectableArea2D" parent="." instance=ExtResource("3_oprr8")]
+select_action = "ui_select"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SelectableArea2D"]
+position = Vector2(-1.00002, -1.5)
+shape = SubResource("RectangleShape2D_p4m5w")
+
+[node name="Interface" parent="." instance=ExtResource("4_xq7n7")]
+
+[node name="SellButton" type="Button" parent="Interface"]
+layout_mode = 0
+offset_left = -378.0
+offset_top = 396.0
+offset_right = 383.0
+offset_bottom = 640.0
+theme_override_font_sizes/font_size = 184
+text = "SELL"
+
+[node name="UICooldownBar" parent="." instance=ExtResource("5_4ooqt")]
+offset_left = -316.667
+offset_top = -546.667
+offset_right = -316.667
+offset_bottom = -539.341
+scale = Vector2(5.428, 6.077)
+
+[connection signal="fired" from="Weapon2D" to="." method="_on_weapon_2d_fired"]
+[connection signal="selection_changed" from="SelectableArea2D" to="." method="_on_selectable_area_2d_selection_changed"]
+[connection signal="pressed" from="Interface/SellButton" to="." method="_on_sell_button_pressed"]
