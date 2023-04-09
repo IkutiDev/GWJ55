@@ -32,7 +32,7 @@ func _on_selectable_area_2d_selection_changed(selected):
 
 
 func _on_sell_button_pressed():
-	emit_signal("sold", cost / 2, position)
+	emit_signal("sold", cost / 2, global_position)
 	queue_free()
 
 

@@ -1,5 +1,7 @@
 extends Node
 
+@export var main_menu_scene : PackedScene
+
 @export var fader_image : ColorRect
 @export var fader_animation_player : AnimationPlayer
 
@@ -30,3 +32,9 @@ func pause_game(pause : bool, reason : String):
 		push_warning("Pause counter undeflows! Investigate why")
 	
 	get_tree().paused = pause_counter < 0
+
+func lose_game() -> void:
+	print("lost!")
+	change_scene_with_fade(main_menu_scene)
+	
+	

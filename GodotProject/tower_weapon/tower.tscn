@@ -1,8 +1,8 @@
 [gd_scene load_steps=8 format=3 uid="uid://dbku73oi641ts"]
 
-[ext_resource type="Texture2D" uid="uid://84g77e7li05g" path="res://room/WIP/block(9).png" id="1_ohcej"]
 [ext_resource type="Script" path="res://tower_weapon/tower.gd" id="1_t6206"]
 [ext_resource type="PackedScene" uid="uid://b7l7bqk3t0ceu" path="res://tower_weapon/weapon_2d.tscn" id="2_00d4g"]
+[ext_resource type="Texture2D" uid="uid://bfm37yap6owev" path="res://art/TeddyDay.png" id="2_7hvcb"]
 [ext_resource type="PackedScene" uid="uid://cwd5swlm2p78q" path="res://selectable_area_2d.tscn" id="3_oprr8"]
 [ext_resource type="PackedScene" uid="uid://i4whilt82fmp" path="res://UIUnit.tscn" id="4_xq7n7"]
 [ext_resource type="PackedScene" uid="uid://dmeia08ut1fn2" path="res://UICooldownBar/UICooldownBar.tscn" id="5_4ooqt"]
@@ -11,7 +11,8 @@
 size = Vector2(760, 700)
 
 [node name="Tower" type="Node2D" node_paths=PackedStringArray("_weapon", "_interface", "_cooldown_bar", "_selection")]
-scale = Vector2(0.3, 0.3)
+z_index = 10
+scale = Vector2(0.25, 0.25)
 script = ExtResource("1_t6206")
 _weapon = NodePath("Weapon2D")
 _interface = NodePath("Interface")
@@ -19,7 +20,8 @@ _cooldown_bar = NodePath("UICooldownBar")
 _selection = NodePath("SelectableArea2D")
 
 [node name="Visual" type="Sprite2D" parent="."]
-texture = ExtResource("1_ohcej")
+scale = Vector2(7.577, 7.577)
+texture = ExtResource("2_7hvcb")
 
 [node name="Weapon2D" parent="." instance=ExtResource("2_00d4g")]
 fire_range = 650.0

@@ -1,0 +1,29 @@
+[gd_scene load_steps=7 format=3 uid="uid://vqoi73n0yo0p"]
+
+[ext_resource type="Script" path="res://player_base.gd" id="1_rh0ow"]
+[ext_resource type="Texture2D" uid="uid://eoyau07oi2c7" path="res://art/Bed.png" id="1_tcsg2"]
+[ext_resource type="Script" path="res://VisualChanger.gd" id="2_40jxw"]
+[ext_resource type="Texture2D" uid="uid://bdima5i5waufj" path="res://art/BedDream.png" id="3_ngn3e"]
+[ext_resource type="PackedScene" uid="uid://dyly52q653cet" path="res://damage/hurtbox/hurt_box_area_2d.tscn" id="4_h8s5h"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w7dtv"]
+size = Vector2(363, 286)
+
+[node name="PlayerBase" type="Node2D" node_paths=PackedStringArray("_sprite", "_hurt_box")]
+script = ExtResource("1_rh0ow")
+_sprite = NodePath("Bed")
+_hurt_box = NodePath("hurt_box_area_2d")
+
+[node name="Bed" type="Sprite2D" parent="." groups=["visual"]]
+texture = ExtResource("1_tcsg2")
+script = ExtResource("2_40jxw")
+day_sprite = ExtResource("1_tcsg2")
+night_sprite = ExtResource("3_ngn3e")
+
+[node name="hurt_box_area_2d" parent="." instance=ExtResource("4_h8s5h")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hurt_box_area_2d"]
+position = Vector2(1.5, -2)
+shape = SubResource("RectangleShape2D_w7dtv")
+
+[connection signal="hit_landed" from="hurt_box_area_2d" to="." method="_on_hurt_box_area_2d_hit_landed"]

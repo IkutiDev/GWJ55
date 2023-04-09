@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://byarkhjrac3ro"]
+
+[ext_resource type="Texture2D" uid="uid://dtwuk8be8yt2p" path="res://heart.svg" id="1"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6f1ud"]
+bg_color = Color(0.968627, 0.368627, 0.411765, 1)
+
+[node name="HealthBar" type="ProgressBar"]
+offset_right = 131.0
+offset_bottom = 27.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_6f1ud")
+step = 1.0
+value = 50.0
+show_percentage = false
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = -32.0
+offset_right = -5.0
+offset_bottom = 27.0
+texture = ExtResource("1")
+expand_mode = 1
+stretch_mode = 4

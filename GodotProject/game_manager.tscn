@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://c8r7gpdxldn21"]
+[gd_scene load_steps=6 format=3 uid="uid://c8r7gpdxldn21"]
 
 [ext_resource type="Script" path="res://game_manager.gd" id="1_6ae1u"]
+[ext_resource type="PackedScene" uid="uid://cs3ld10q2qsvk" path="res://main_menu/main_menu.tscn" id="2_5fs5l"]
 
 [sub_resource type="Animation" id="Animation_03kch"]
 length = 0.001
@@ -41,6 +42,7 @@ _data = {
 
 [node name="GameManager" type="Node" node_paths=PackedStringArray("fader_image", "fader_animation_player")]
 script = ExtResource("1_6ae1u")
+main_menu_scene = ExtResource("2_5fs5l")
 fader_image = NodePath("CanvasLayer/Fader/ColorRect")
 fader_animation_player = NodePath("CanvasLayer/Fader/AnimationPlayer")
 

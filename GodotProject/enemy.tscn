@@ -1,0 +1,134 @@
+[gd_scene load_steps=13 format=3 uid="uid://bjginqclld5ik"]
+
+[ext_resource type="Script" path="res://enemy.gd" id="1_uv3ew"]
+[ext_resource type="Texture2D" uid="uid://rg22yiwv6hut" path="res://icon.svg" id="1_xamoj"]
+[ext_resource type="PackedScene" uid="uid://dlnpkx46ss0cd" path="res://damage/hitbox/hit_box_area_2d.tscn" id="2_lgvs5"]
+[ext_resource type="PackedScene" uid="uid://dyly52q653cet" path="res://damage/hurtbox/hurt_box_area_2d.tscn" id="3_meidq"]
+[ext_resource type="PackedScene" uid="uid://byarkhjrac3ro" path="res://UIHealthBar.tscn" id="5_x46ve"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3cn6u"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tld4n"]
+radius = 65.0692
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_uecmq"]
+radius = 65.6201
+
+[sub_resource type="Animation" id="Animation_3vris"]
+resource_name = "spawn"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visual:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.160784, 0.160784, 0.160784, 0), Color(0.160784, 0.160784, 0.160784, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_6dm1y"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visual:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.160784, 0.160784, 0.160784, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_g0s6i"]
+resource_name = "disappear"
+length = 0.25
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visual:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.160784, 0.160784, 0.160784, 1), Color(0.160784, 0.160784, 0.160784, 0)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.25),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6tils"]
+_data = {
+"RESET": SubResource("Animation_6dm1y"),
+"disappear": SubResource("Animation_g0s6i"),
+"spawn": SubResource("Animation_3vris")
+}
+
+[node name="Enemy" type="PathFollow2D"]
+loop = false
+script = ExtResource("1_uv3ew")
+max_health = 5
+
+[node name="Visual" type="Sprite2D" parent="."]
+modulate = Color(0.160784, 0.160784, 0.160784, 0)
+texture = ExtResource("1_xamoj")
+
+[node name="HitBoxArea2D" parent="." instance=ExtResource("2_lgvs5")]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxArea2D"]
+shape = SubResource("CircleShape2D_3cn6u")
+
+[node name="hurt_box_area_2d" parent="." instance=ExtResource("3_meidq")]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hurt_box_area_2d"]
+shape = SubResource("CircleShape2D_tld4n")
+
+[node name="VisibleArea2D" type="Area2D" parent="."]
+visible = false
+collision_layer = 4
+collision_mask = 0
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="VisibleArea2D"]
+shape = SubResource("CircleShape2D_uecmq")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "spawn"
+libraries = {
+"": SubResource("AnimationLibrary_6tils")
+}
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="."]
+position = Vector2(-65, -97)
+remote_path = NodePath("../UIPivot")
+update_rotation = false
+update_scale = false
+
+[node name="UIPivot" type="Node2D" parent="."]
+position = Vector2(-65, -97)
+
+[node name="HealthBar" parent="UIPivot" instance=ExtResource("5_x46ve")]
+metadata/_edit_use_anchors_ = true
+
+[connection signal="hit_landed" from="hurt_box_area_2d" to="." method="_on_hurt_box_area_2d_hit_landed"]

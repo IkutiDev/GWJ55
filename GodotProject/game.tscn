@@ -1,55 +1,152 @@
-[gd_scene load_steps=8 format=3 uid="uid://bp7qvv701wsi6"]
+[gd_scene load_steps=24 format=3 uid="uid://bp7qvv701wsi6"]
 
 [ext_resource type="TileSet" uid="uid://dyof3vcstne25" path="res://room/WIP/room_floor_tile_set.tres" id="1_2lhwq"]
 [ext_resource type="Script" path="res://game.gd" id="1_rfqmb"]
 [ext_resource type="PackedScene" uid="uid://bb2psf86b80be" path="res://gameplay_gui/gameplay_gui.tscn" id="2_0o5px"]
 [ext_resource type="AudioStream" uid="uid://g85q2sfmhb68" path="res://audio/phase_changes/384188__inspectorj__rooster-crowing-a.wav" id="2_hfuwj"]
+[ext_resource type="Script" path="res://VisualChanger.gd" id="3_gxd1h"]
 [ext_resource type="Script" path="res://player/tower_placer.gd" id="5_fcmep"]
+[ext_resource type="Texture2D" uid="uid://d103xgev6mgld" path="res://art/leftwallDream.png" id="6_5tyon"]
+[ext_resource type="Texture2D" uid="uid://cf11pscu20oo3" path="res://art/floorday.png" id="7_5a1q5"]
 [ext_resource type="Script" path="res://day_manager.gd" id="7_vsebb"]
-[ext_resource type="PackedScene" uid="uid://dbku73oi641ts" path="res://tower_weapon/tower.tscn" id="7_we28e"]
+[ext_resource type="Texture2D" uid="uid://diarkc73ersv5" path="res://art/rightwallDream.png" id="8_pwviy"]
+[ext_resource type="Texture2D" uid="uid://bdgtblkblorec" path="res://art/floordream.png" id="10_ltm3l"]
+[ext_resource type="Texture2D" uid="uid://dgmhgox6vs6gp" path="res://art/Grid.png" id="11_gv13e"]
+[ext_resource type="Texture2D" uid="uid://bxvnxwbhudxru" path="res://art/rightwallDay.png" id="12_4tyv1"]
+[ext_resource type="PackedScene" uid="uid://vqoi73n0yo0p" path="res://player_base.tscn" id="12_72rms"]
+[ext_resource type="Texture2D" uid="uid://b6qx4qqxsaykg" path="res://art/leftwallDay.png" id="12_qonhq"]
+[ext_resource type="Texture2D" uid="uid://ceedcemks3an" path="res://art/SpawnPoints.png" id="13_3blxj"]
+[ext_resource type="Texture2D" uid="uid://efj3q45s0fc6" path="res://art/Toybox.png" id="14_47y1g"]
+[ext_resource type="Texture2D" uid="uid://ufwvjbd5ati0" path="res://art/ToyboxDream.png" id="15_tc7m1"]
+[ext_resource type="Texture2D" uid="uid://b6hr76mau5tpf" path="res://art/chair.png" id="16_tysni"]
+[ext_resource type="Texture2D" uid="uid://cou6kt7e4ggx8" path="res://art/ShadowToyBoxDream.png" id="21_3q8tt"]
+[ext_resource type="PackedScene" uid="uid://bjginqclld5ik" path="res://enemy.tscn" id="21_fbn3a"]
+[ext_resource type="Script" path="res://wave.gd" id="21_lfegu"]
+
+[sub_resource type="Curve2D" id="Curve2D_4mthr"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -342, -67, 0, 0, 0, 0, -190, 46, 0, 0, 0, 0, -354, 153, 0, 0, 0, 0, -98, 308)
+}
+point_count = 4
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_rfqmb")
 
-[node name="PlayerRoom" type="Node2D" parent="."]
+[node name="Floor" type="Sprite2D" parent="." groups=["visual"]]
+position = Vector2(-110, 117)
+texture = ExtResource("7_5a1q5")
+script = ExtResource("3_gxd1h")
+day_sprite = ExtResource("7_5a1q5")
+night_sprite = ExtResource("10_ltm3l")
 
-[node name="FloorTileMap" type="TileMap" parent="PlayerRoom"]
+[node name="Grid" type="Sprite2D" parent="."]
+texture = ExtResource("11_gv13e")
+
+[node name="FloorTileMap" type="TileMap" parent="."]
 y_sort_enabled = true
-position = Vector2(-100, 0)
+position = Vector2(3, 46)
 tile_set = ExtResource("1_2lhwq")
 cell_quadrant_size = 65
 format = 2
-layer_0/tile_data = PackedInt32Array(-65536, 0, 0, -65535, 0, 0, -1, 0, 0, -65534, 0, 0, -2, 0, 0, -65533, 0, 0, -3, 0, 0, -65532, 0, 0, -65539, 0, 0, 65533, 0, 0, -131075, 0, 0, 131069, 0, 0, -196611, 0, 0, 196605, 0, 0, -262147, 0, 0, 262141, 0, 0, 327677, 0, 0, -262146, 0, 0, -262145, 0, 0, -327680, 0, 0, -327679, 0, 0, -327678, 0, 0, -327677, 0, 0, -327676, 0, 0, -262140, 0, 0, -196604, 0, 0, -131068, 0, 0, 4, 0, 0, 65540, 0, 0, 131076, 0, 0, 196612, 0, 0, 327678, 0, 0, 327679, 0, 0, 262144, 0, 0, 262145, 0, 0, 262146, 0, 0, 262147, 0, 0, 262148, 0, 0, 196611, 0, 0, 196610, 0, 0, 196609, 0, 0, 196608, 0, 0, 262143, 0, 0, 262142, 0, 0, 196606, 0, 0, 196607, 0, 0, 131070, 0, 0, 65534, 0, 0, 65535, 0, 0, 131071, 0, 0, 65536, 0, 0, 0, 0, 0, 1, 0, 0, 65538, 0, 0, 131074, 0, 0, 131073, 0, 0, 131072, 0, 0, 65537, 0, 0, 65539, 0, 0, 131075, 0, 0, 2, 0, 0, 3, 0, 0, -131071, 0, 0, -131072, 0, 0, -65537, 0, 0, -65538, 0, 0, -131074, 0, 0, -196610, 0, 0, -196609, 0, 0, -262144, 0, 0, -196608, 0, 0, -131073, 0, 0, -196607, 0, 0, -262143, 0, 0, -262142, 0, 0, -262141, 0, 0, -196605, 0, 0, -196606, 0, 0, -131070, 0, 0, -131069, 0, 0)
+layer_0/name = "Placeable"
+layer_0/modulate = Color(0.619608, 0.984314, 0.607843, 1)
+layer_0/tile_data = PackedInt32Array(-196612, 0, 0, -196611, 0, 0, -196610, 0, 0, -262143, 0, 0, -262142, 0, 0, -262141, 0, 0, -196605, 0, 0, -131070, 0, 0, -65534, 0, 0, 2, 0, 0, 65538, 0, 0, 131074, 0, 0, 196610, 0, 0, 196611, 0, 0, 3, 0, 0, -131071, 0, 0, -196607, 0, 0, -196606, 0, 0, -131072, 0, 0, -65537, 0, 0, -65538, 0, 0, -65539, 0, 0, -131075, 0, 0, -131074, 0, 0, -131073, 0, 0, -196608, 0, 0, -65540, 0, 0, -131076, 0, 0, -4, 0, 0, 65532, 0, 0, 131068, 0, 0, 131069, 0, 0, 262142, 0, 0, 262143, 0, 0, 196608, 0, 0, 196609, 0, 0, 131073, 0, 0, 0, 0, 0, -2, 0, 0, -3, 0, 0, -65535, 0, 0, 1, 0, 0, 65535, 0, 0, 65534, 0, 0, 65533, 0, 0, 131070, 0, 0, 131071, 0, 0, 65536, 0, 0, 196607, 0, 0, 196606, 0, 0, 131072, 0, 0)
+layer_1/name = "Unplaceable"
+layer_1/enabled = true
+layer_1/modulate = Color(0.666667, 0.192157, 0.321569, 1)
+layer_1/y_sort_enabled = false
+layer_1/y_sort_origin = 0
+layer_1/z_index = 0
+layer_1/tile_data = PackedInt32Array(196604, 1, 0, 196605, 1, 0, 262141, 1, 0, 262140, 1, 0, -1, 1, 0, -65536, 1, 0, 65537, 1, 0, -65533, 1, 0, -131069, 1, 0, -196609, 1, 0, -262144, 1, 0, 65539, 1, 0, 131075, 1, 0)
 
-[node name="GameplayCamera2D" type="Camera2D" parent="."]
-zoom = Vector2(0.35, 0.35)
+[node name="Rightwall" type="Sprite2D" parent="." groups=["visual"]]
+position = Vector2(266, -171)
+texture = ExtResource("12_4tyv1")
+script = ExtResource("3_gxd1h")
+day_sprite = ExtResource("12_4tyv1")
+night_sprite = ExtResource("8_pwviy")
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("2_hfuwj")
+[node name="Leftwall" type="Sprite2D" parent="." groups=["visual"]]
+position = Vector2(-355, -166)
+texture = ExtResource("12_qonhq")
+script = ExtResource("3_gxd1h")
+day_sprite = ExtResource("12_qonhq")
+night_sprite = ExtResource("6_5tyon")
 
-[node name="TowerPlacer" type="Node2D" parent="." node_paths=PackedStringArray("floor_tile_map", "selection_visual")]
+[node name="SpawnPoints" type="Sprite2D" parent="."]
+position = Vector2(-3, -5)
+texture = ExtResource("13_3blxj")
+
+[node name="PlayerRoom" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="PlayerBase" parent="PlayerRoom" instance=ExtResource("12_72rms")]
+position = Vector2(7, 389)
+
+[node name="Toybox" type="Sprite2D" parent="PlayerRoom" node_paths=PackedStringArray("sprite_renderer_during_night") groups=["visual"]]
+position = Vector2(-41, 35)
+texture = ExtResource("14_47y1g")
+script = ExtResource("3_gxd1h")
+day_sprite = ExtResource("14_47y1g")
+night_sprite = ExtResource("15_tc7m1")
+sprite_renderer_during_night = NodePath("ShadowToyBoxDream")
+
+[node name="ShadowToyBoxDream" type="Sprite2D" parent="PlayerRoom/Toybox"]
+show_behind_parent = true
+position = Vector2(76, 85)
+texture = ExtResource("21_3q8tt")
+
+[node name="Chair" type="Sprite2D" parent="PlayerRoom"]
+y_sort_enabled = true
+position = Vector2(276, 27)
+texture = ExtResource("16_tysni")
+
+[node name="TowerPlacer" type="Node2D" parent="PlayerRoom" node_paths=PackedStringArray("floor_tile_map")]
+y_sort_enabled = true
 position = Vector2(-225, -125)
 script = ExtResource("5_fcmep")
-floor_tile_map = NodePath("../PlayerRoom/FloorTileMap")
-selection_visual = NodePath("SelectionVisual")
+floor_tile_map = NodePath("../../FloorTileMap")
 offset = Vector2(0, 25)
 
-[node name="SelectionVisual" type="Sprite2D" parent="TowerPlacer"]
+[node name="SelectionVisual" type="Sprite2D" parent="PlayerRoom/TowerPlacer"]
 modulate = Color(0.643137, 0.992157, 0.447059, 1)
 rotation = 0.560251
 scale = Vector2(1.137, 1.137)
 skew = 0.500909
 
+[node name="GameplayCamera2D" type="Camera2D" parent="."]
+position = Vector2(-84, 75)
+offset = Vector2(100, -25)
+zoom = Vector2(0.75, 0.75)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_hfuwj")
+
 [node name="DayManager" type="Node" parent="."]
 script = ExtResource("7_vsebb")
 days_names = ["Day 1", "Day 2", "Day 3", "Day 4", "Day 5"]
 nights_names = ["Night 1", "Night 2", "Night 3", "Night 4", "Night 5"]
-tower_placing_timer = 5.0
+bg_night_color = Color(0, 0.117647, 0.180392, 1)
+bg_day_color = Color(0.168627, 0.0980392, 0.0784314, 1)
 
 [node name="gameplay_gui" parent="." instance=ExtResource("2_0o5px")]
 
-[node name="Tower" parent="." instance=ExtResource("7_we28e")]
-position = Vector2(284, -307)
+[node name="Path2D" type="Path2D" parent="."]
+position = Vector2(-4, 0)
+curve = SubResource("Curve2D_4mthr")
+script = ExtResource("21_lfegu")
+enemy_time_arrival = 1.0
+
+[node name="Enemy" parent="Path2D" instance=ExtResource("21_fbn3a")]
+position = Vector2(-617, -772)
+
+[node name="Enemy2" parent="Path2D" instance=ExtResource("21_fbn3a")]
+position = Vector2(-561, -680)
+rotation = 0.639277
+
+[node name="Enemy3" parent="Path2D" instance=ExtResource("21_fbn3a")]
+position = Vector2(-776, -737)
+rotation = 0.639277
 
 [connection signal="phase_changed" from="DayManager" to="gameplay_gui" method="_on_day_manager_phase_changed"]
-[connection signal="timer_changed" from="DayManager" to="gameplay_gui" method="_on_day_manager_timer_changed"]
+[connection signal="sleep_button_pressed" from="gameplay_gui" to="DayManager" method="_on_gameplay_gui_sleep_button_pressed"]

@@ -3,11 +3,10 @@
 [ext_resource type="Script" path="res://gameplay_gui/gameplay_gui.gd" id="1_1hro6"]
 [ext_resource type="PackedScene" uid="uid://b5yhrygkg5m0n" path="res://gameplay_gui/towers/tower_icon.tscn" id="2_nlwc0"]
 
-[node name="GameplayGui" type="CanvasLayer" node_paths=PackedStringArray("phase_name_label", "timer_label")]
+[node name="GameplayGui" type="CanvasLayer" node_paths=PackedStringArray("phase_name_label", "sleep_button")]
 script = ExtResource("1_1hro6")
 phase_name_label = NodePath("GUI/PhaseName")
-timer_static_text = "Timer: "
-timer_label = NodePath("GUI/Timer")
+sleep_button = NodePath("GUI/SleepButton")
 
 [node name="GUI" type="Control" parent="."]
 layout_mode = 3
@@ -28,16 +27,15 @@ offset_right = 104.0
 offset_bottom = 26.0
 text = "Day 99"
 
-[node name="Timer" type="Label" parent="GUI"]
+[node name="SleepButton" type="Button" parent="GUI"]
 layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -52.0
-offset_right = 52.0
-offset_bottom = 26.0
-grow_horizontal = 2
-text = "TIMER: 99"
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -48.0
+offset_right = 141.0
+grow_vertical = 0
+text = "Go to sleep"
 
 [node name="Toybox" type="Panel" parent="."]
 anchors_preset = 11
@@ -63,4 +61,5 @@ theme_override_constants/separation = 15
 [node name="TowerIcon" parent="Toybox/VBoxContainer" instance=ExtResource("2_nlwc0")]
 layout_mode = 2
 
+[connection signal="pressed" from="GUI/SleepButton" to="." method="_on_sleep_button_pressed"]
 [connection signal="pressed" from="Toybox/VBoxContainer/TowerIcon" to="." method="_on_tower_icon_pressed"]
